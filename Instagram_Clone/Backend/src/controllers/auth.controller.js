@@ -87,7 +87,19 @@ async function loginApi(req,res){
     })
 }
 
+async function getMeApi(req,res){
+    const userId = req.user.id;
+
+    const record = await userModel.findById(userId)
+
+    res.status(200).json({
+        message:"Here is your details",
+        record
+    })
+}
+
 module.exports = {
     registerApi,
-    loginApi
+    loginApi,
+    getMeApi
 }

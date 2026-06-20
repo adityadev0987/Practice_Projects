@@ -1,14 +1,17 @@
 import {BrowserRouter,Routes,Route} from 'react-router'
-import Login from './features/auth/Login'
-import Register from './features/auth/Register'
+import Login from './features/auth/pages/Login'
+import Register from './features/auth/pages/Register'
 
 function AppRoutes(){
+    return (
     <BrowserRouter>
-    <Routes>
-        <Route path='/Login' element={<Login/>}></Route>
-        <Route path='/register' element={<Register/>}></Route>
-    </Routes>
+        <Routes>
+            <Route path='/' element={<></>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/register' element={<Register/>}/>
+        </Routes>
     </BrowserRouter>
+    )
 }
 
 export default AppRoutes
