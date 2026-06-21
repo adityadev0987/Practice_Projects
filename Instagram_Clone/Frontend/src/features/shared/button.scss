@@ -1,0 +1,13 @@
+button{
+    background-color:rgb(185, 95, 185);
+    color:white;
+    border:none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease-in-out;
+
+
+    &:active{
+        scale:0.9
+    }
+
+}
