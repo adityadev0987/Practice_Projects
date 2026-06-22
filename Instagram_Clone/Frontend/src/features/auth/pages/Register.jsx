@@ -17,6 +17,14 @@ const Register = () => {
     await handleRegister(username, email, password);
     navigate("/");
   }
+
+  if(loading){
+    return(
+      <main>
+        <h1>Loading...</h1>
+      </main>
+    )
+  }
   return (
     <div>
       <main>
