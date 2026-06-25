@@ -1,0 +1,31 @@
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .createPostBox {
+    display: flex;
+    flex-direction: column;
+
+    padding: 2rem;
+    gap: 1rem;
+    form {
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .file-conatiner,
+      input {
+        padding: 0.5rem 1rem;
+        background-color: white;
+        border: none;
+        font-size: 1rem;
+      }
+      .file-conatiner {
+        color: gray;
+        font-weight: 400;
+      }
+    }
+  }
+}

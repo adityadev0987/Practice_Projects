@@ -21,13 +21,12 @@ async function createPostController(req,res){
     const post = await postModel.create({
         caption:req.body.caption,
         imageUrl:file.url,
-        user:checkToken.id
+        user:req.user.id
     })
     //getting user details from userModel 
-    const user = await userModel.findById(checkToken.id);
+    // const user = await userModel.findById(checkToken.id);
 
     res.status(201).json({
-        username:user.username,
         message:"post created Successfully",
         post,
         
@@ -105,8 +104,39 @@ async function likeDetailsController(req,res){
     })
 }
 
+async function unLikePostController(req,res){
+    const username = req.user.username;
+    const postId = req.params.postId;
+
+    const isLiked = await likeModel.findOne({
+        post:postId,
+        user:username
+    })
+
+    if(!isLiked){
+        return res.status(400).json({
+            message:"You didn't like the post"
+        })
+    }
+    await likeModel.findOneAndDelete({_id:isLiked._id})
+    res.status(200).json({
+        message:"Post unliked Successfully"
+    })
+
+}
+
 async function getFeedController(req,res){
-    const feed = await postModel.find().populate('user');
+    const user = req.user
+    const feed = await Promise.all((await postModel.find().populate('user').lean())
+    .map(async(post)=>{
+        const isLiked = await likeModel.findOne({
+            post:post._id,
+            user:user.username
+
+        }) 
+        post.isLiked = Boolean(isLiked)
+        return post
+    }));
     res.status(200).json({
         feed
     })
@@ -117,5 +147,6 @@ module.exports = {
     getPostController,
     getPostDetailsController,
     likeDetailsController,
+    unLikePostController,
     getFeedController
 }
