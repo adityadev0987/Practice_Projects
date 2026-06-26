@@ -14,15 +14,15 @@ const Profile = () => {
                   <h1>Aditya kumar </h1>
                 </div>
                 <div className="info">
-                  <div className="post">
+                  <div className="post infoBox">
                     <p>1</p>
                     <p>posts</p>
                   </div>
-                  <div className="followers">
+                  <div className="followers infoBox">
                     <p>1,121</p>
                     <p>followers</p>
                   </div>
-                  <div className="following">
+                  <div className="following infoBox">
                     <p>563</p>
                     <p>following</p>
                   </div>
@@ -41,7 +41,11 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className="profile-post"></div>
+          <div className="profile-post">
+            <div className="post-box">
+              <img src='https://i.pinimg.com/webp/736x/93/1d/1a/931d1ab629a6cbe0ed9edf37c7fbf9da.webp'></img>
+            </div>
+          </div>
         </div>
       </main>
     </div>
