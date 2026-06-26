@@ -1,0 +1,24 @@
+main{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+
+    .profile-container{
+        display: flex;
+        flex-direction: column;
+
+        .information{
+            .top{
+                display: flex;
+                justify-content: space-between;
+
+                .profilePic{
+                    width:200px;
+                    aspect-ratio: 1/1;
+                    border-radius: 50%;
+
+                }
+            }
+        }
+    }
+}

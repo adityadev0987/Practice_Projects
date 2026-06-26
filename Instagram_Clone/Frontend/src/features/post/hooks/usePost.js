@@ -1,6 +1,6 @@
 import { useContext,useEffect,useState } from "react";
 import { PostContext } from "../post.context";
-import { getFeed,unlikePost,likePost,createPost } from "../services/post.api";
+import { getFeed,unlikePost,likePost,createPost,getFollowingStatus,followUser,unfollowUser } from "../services/post.api";
 
 
 export const usePost = ()=>{
@@ -31,6 +31,20 @@ export const usePost = ()=>{
         setLoading(false)
         await handleFeed()
     }
+    async function handleFollow(){
+        const response = await getFollowingStatus();
+        return response;
+    }
+
+    async function handleFollowUser(username){
+        const response = await followUser(username);
+        return response;
+    }
+
+    async function handleUnfollowUser(username){
+        const response = await unfollowUser(username);
+        return response;
+    }
 
     useEffect(()=>{
         handleFeed()
@@ -38,6 +52,6 @@ export const usePost = ()=>{
 
 
     return{
-        handleFeed,loading,feed,post,handleUnLike,handleLike,handleCreatePost
+        handleFeed,loading,feed,post,handleUnLike,handleLike,handleCreatePost,handleFollow,handleFollowUser,handleUnfollowUser
     }
 }

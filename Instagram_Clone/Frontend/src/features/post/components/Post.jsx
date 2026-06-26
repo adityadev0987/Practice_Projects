@@ -1,11 +1,51 @@
 import React from 'react'
+import { usePost } from '../hooks/usePost'
 
-const Post = ({ user, post, loading , handleLike, handleUnLike }) => {
+const Post = ({ user, post, loading , handleLike, handleUnLike, handleFollow, handleFollowUser, handleUnfollowUser, followStatus, updateFollowStatus }) => {
+
+
+    // Determine button text based on follow status from parent
+    const getFollowButtonText = () => {
+        const status = followStatus[user.username];
+        if(!status){
+            return "Follow";
+        }
+        else if(status === "accepted"){
+            return "Unfollow";
+        }
+        else if(status === "pending"){
+            return "Requested";
+        }
+        else{
+            return "Follow";
+        }
+    }
+
+    const handleFollowButtonClick = async () => {
+        try {
+            const currentStatus = getFollowButtonText();
+            
+            if(currentStatus === "Follow"){
+                await handleFollowUser(user.username); // Follow user by username
+                updateFollowStatus(user.username, "pending"); // Update parent state
+            }
+            else if(currentStatus === "Unfollow"){
+                await handleUnfollowUser(user.username); // Unfollow user by username
+                updateFollowStatus(user.username, null); // Remove from followed
+            }
+            // If "Requested" - do nothing, already sent request
+        } catch (error) {
+            console.error("Error following/unfollowing user:", error);
+        }
+    }
   return (
     <div className="post">
                     <div className="top">
                         <img src={user.profileImage} alt='profileImage'/>
                         <p>{user.username}</p>
+                        <button
+                        onClick={handleFollowButtonClick}
+                        className='button followButton'>{getFollowButtonText()}</button>
                     </div>
                     <div className="post-area">
                         <img src={post.imageUrl}alt='postImage'/>

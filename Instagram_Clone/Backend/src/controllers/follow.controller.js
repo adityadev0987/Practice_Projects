@@ -69,7 +69,7 @@ async function UnfollowUserController(req,res){
     })
 }
 
-async function statusdetailsController(req,res){
+async function followerStatusdetailsController(req,res){
     const user = req.user.username
     const statusRecord = await followModel.find({
         followee:user,
@@ -83,6 +83,31 @@ async function statusdetailsController(req,res){
         message:"Your follow requests",
         statusRecord
     })
+}
+
+async function followingStatusController(req,res){
+    const username = req.user.username;
+
+    const followingStatusRecord = await followModel.find({
+        follower:username,
+        status:{
+            $in:[
+                'pending','accepted','rejected'
+            ]
+        }
+    })
+
+    if(!followingStatusRecord){
+        return res.status(200).json({
+            message:"No users followed"
+        })
+    }
+
+    res.status(200).json({
+        message:"Your following list",
+        followingStatusRecord
+    })
+
 }
 
 async function acceptFollowRequestController(req,res){
@@ -170,7 +195,8 @@ async function rejectFollowRequestController(req,res){
 module.exports = {
     followUserController,
     UnfollowUserController,
-    statusdetailsController,
+    followerStatusdetailsController,
+    followingStatusController,
     acceptFollowRequestController,
     rejectFollowRequestController
 }

@@ -11,29 +11,31 @@ main {
 
   width: 100%;
   display: flex;
-  flex-direction : column;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  .createPost-conatiner{
-    width:100%;
-    display:flex;
+  .createPost-conatiner {
+    width: 100%;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:0.5rem 1rem;
+    padding: 0.5rem 1rem;
 
-    .Post-button{
-      padding:0.5rem 1rem;
-      background-color:rgb(185, 95, 185);
-      
-      .createPost-Link{
-      font-size:1rem;
-      color:white;
-      font-weight: 500;
-    }
-    }
+    .top-navbar {
+      display: flex;
+      gap:2rem;
+      .Post-button , .profile-button {
+        padding: 0.5rem 1rem;
+        background-color: rgb(185, 95, 185);
+      }
 
-    
+      .createPost-Link,.profile-Link{
+        font-size: 1rem;
+        color: white;
+        font-weight: 500;
+      }
+    }
   }
 
   .feed-container {
@@ -53,6 +55,13 @@ main {
             width: 2.3rem;
             aspect-ratio: 1/1;
             border-radius: 50%;
+          }
+          .followButton {
+            background-color: rgba(184, 183, 183, 0.144);
+            border: 1.5px solid white;
+            font-weight: 700;
+            border-radius: 1rem;
+            width: 100px;
           }
         }
         .post-area {
